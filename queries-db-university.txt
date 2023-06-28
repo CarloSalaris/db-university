@@ -40,12 +40,12 @@ SELECT
 
 7. Contare il numero di dipartimenti di cui e' composta l'università (12)
 
-    SELECT (name)
+    SELECT COUNT(*) AS 'departments_count'
     FROM `departments`;
 
 8. Contare gli insegnanti che non hanno un numero di telefono (50)
 
-    SELECT *
+    SELECT COUNT(*) AS 'teachers_no_phone'
     FROM `teachers`
     WHERE phone IS NULL;
 
@@ -71,14 +71,14 @@ GROUP BY
 
 4. Contare quanti corsi di laurea ci sono per ogni dipartimento
 
-    SELECT degree_id, COUNT(*)
-    FROM `courses`
-    GROUP BY degree_id;
+    SELECT department_id, COUNT(*)
+    FROM `degrees`
+    GROUP BY department_id;
 
     //variante con JOIN per vedere il nome dei corsi di laurea
 
-    SELECT degrees.name, COUNT(*)
-    FROM `courses`
-    INNER JOIN degrees
-    ON courses.degree_id = degrees.id
-    GROUP BY degree_id;
+    SELECT departments.name AS 'departments', COUNT(*) AS 'degrees_count'
+    FROM `degrees`
+    INNER JOIN departments
+    ON degrees.department_id = departments.id
+    GROUP BY department_id;
