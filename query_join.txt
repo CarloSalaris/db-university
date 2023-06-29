@@ -63,6 +63,16 @@ JOIN
 BONUS
 7. Selezionare per ogni studente il numero di tentativi sostenuti per ogni esame, stampando anche il voto massimo.
 
+//This only shows all exams taken by the students, without isolating the ones that repeat
 
+SELECT students.surname, students.name, courses.name AS 'course', courses.id AS 'course_id', exams.id AS 'exam_id', exam_student.vote
+FROM students
+    JOIN exam_student
+        ON students.id = exam_student.student_id
+    JOIN exams
+        ON exams.id = exam_student.exam_id
+    JOIN courses
+        on exams.course_id = courses.id
+ORDER BY students.surname, students.name;
 
 Successivamente, filtrare i tentativi con voto minimo 18.
